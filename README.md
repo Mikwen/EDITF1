@@ -2,13 +2,30 @@
 
 TODOS as of 22.04.2017 16:07
 
-**REMOVE course for users.
-
-**MAKE user admin.
+High priority:
 
 **GET file.
 
-**REMOVE dupilcates and null from arrays (courses/admin_courses).
-
 **GET lecture info.
 
+Low priority:
+
+**REMOVE course for users.
+
+**REMOVE dupilcates and null from arrays (courses/admin_courses).
+
+
+Haven't started:
+
+**REMOVE course for users.
+
+**REMOVE dupilcates and null from arrays (courses/admin_courses).
+
+**GET file.
+
+Almost there:
+**GET lecture info.
+
+Done:
+
+**MAKE user admin.
