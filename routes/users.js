@@ -135,6 +135,7 @@ router.put('/user_courses_admin', function(req, res){
 	res.redirect('/');
 });
 
+//GET request to the courses the user is administrating
 router.get('/user_courses_admin', function(req, res){
 	User.getCoursesByUsername(req.body.userId, function(courses_administrating){
 		res.send(courses_administrating);
