@@ -1,5 +1,17 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="myScript.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+<title>
+Login
+</title>
+</head>
+
+<body onload="genarateCalendar()">
 <header class="w3-container w3-teal w3-padding-xlarge">
-  <h1>Welcome, {{username}}.</h1>
+  <h1>Username</h1>
 </header>
 
 
@@ -8,7 +20,9 @@
     <div class="w3-container w3-padding-48" >
       <h2>Courses</h2>
       <ul class="w3-ul">
-        {{courseButtons}}
+        <li class="w3-hover-teal"><a href="view3.html"><h3>TDT4140</h3></a></li>
+        <li class="w3-hover-teal"><h3>MA1101</h3></li>
+        <li class="w3-hover-teal"><h3>AS1337</h3></li>
       </ul>
     </div> 
     <div>
@@ -19,9 +33,9 @@
   <div class="w3-container w3-threequarter w3-padding-64">
     <div class="w3-row"> 
         <div class = "w3-center w3-bar w3-display-container">
-			<button onclick="cal.renderPrevMonth()" class="w3-button w3-teal w3-display-left"> &lt Previous</button>
+			<button class="w3-button w3-teal w3-display-left"> &lt Previous</button>
 			<h2 id="month_name" > Month-name </h2> 
-			<button onclick="cal.renderNextMonth()" class="w3-button w3-teal w3-display-right">Next &gt</button>
+			<button class="w3-button w3-teal w3-display-right">Next &gt</button>
 		</div>
     <div class="w3-row w3-bottombar w3-border-teal">
         <div class="w3-col w3-padding-12" style="width:14.28%"><p class= "w3-center">Mon</p></div>
@@ -32,14 +46,20 @@
         <div class="w3-col w3-padding-12" style="width:14.28%"><p class= "w3-center">Sat</p></div>
         <div class="w3-col w3-padding-12" style="width:14.28%"><p class= "w3-center">Sun</p></div>
     </div>
-    <div id="daysInGrid" class="w3-row"></div>
+    <div id="daysInGrid" class="w3-row">
+       
+    </div>
+     
+    
+    
+  
   </div>
   </div>
+  
+  
 </div>
 
-<script src="js/Calendar.js"></script>
-<script>
-	document.addEventListener('DOMContentLoaded', function() {	
-		cal.render();
-	});
-</script>
+
+</body>
+</html>
+

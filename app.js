@@ -11,6 +11,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+var fileUpload = require('express-fileupload');
 
 mongoose.connect('mongodb://localhost/loginapp')
 var db = mongoose.connection;
@@ -18,6 +19,8 @@ var db = mongoose.connection;
 var routes  = require ('./routes/index');
 var users = require ('./routes/users');
 var lecture = require('./routes/lecture')
+var files = require ('./routes/files');
+var course = require ('./routes/course');
 
 //init app
 var app = express();
@@ -83,9 +86,14 @@ app.use(function (req, res, next){
     next();
 });
 
+//File uploading
+app.use(fileUpload());
+
 //Route files (middleware)
 app.use('/', routes);
 app.use('/users', users);
+app.use('/files', files);
+app.use('/course', course);
 
 //set port
 app.set('port', (process.env.PORT || 3000));
