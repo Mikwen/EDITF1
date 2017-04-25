@@ -1,22 +1,35 @@
 var Handlebars = require('handlebars');
 var express = require('express');
 var router = express.Router();
+var http = require('http');
 
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res){
-	res.render('index', {
-        username: req.user.name,            
-        helpers: {
-            courseButtons: function() {
-                returnstring = '';
-                var courses = ['TDT4150', 'TDT4314', 'TDT3513', 'TDT4355'];
-                for (var i in courses) {
-                    returnstring += courseLink(courses[i]) + '\n'; 
-                }
-                return new Handlebars.SafeString(returnstring);
+	var options = {
+		host: 'localhost',
+		port: '3330',
+		path: '/users/user_courses?userId='+req.user.username
+	}
+	http.request(options, function(response) {
+		var str = ''
+		response.on('data', function (chunk) {
+			str += chunk;
+		});
+
+		response.on('end', function () {
+			var courses = JSON.parse(str);
+			buttonString = '';
+			for (var i in courses) {
+                buttonString += courseLink(courses[i]) + '\n'; 
             }
-        }
-    });
+			var buttonString = new Handlebars.SafeString(buttonString);
+			res.render('index', {
+				username: req.user.name,
+				courseButtons: buttonString
+			});
+			
+		});
+	}).end();
 });
 
 function courseLink(course) {

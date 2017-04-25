@@ -91,7 +91,7 @@ module.exports.getCoursesByUsername = function(userId, callback){
 }
 
 //Find courses where you are admin.
-module.exports.getCoursesByUsername = function(userId, callback){
+module.exports.getAdminCoursesByUsername = function(userId, callback){
 	User.getUserByUsername(userId, function(err, user){
 		callback(user.courses_administrating);
 	});

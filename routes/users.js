@@ -123,7 +123,7 @@ router.put('/user_courses', function(req, res){
 });
 
 router.get('/user_courses', function(req, res){
-	User.getCoursesByUsername(req.body.userId, function(courses_attending){
+	User.getCoursesByUsername(req.query.userId, function(courses_attending){
 		//res.json = courses_attending;
 		res.send(courses_attending);
 	});
@@ -137,7 +137,7 @@ router.put('/user_courses_admin', function(req, res){
 
 //GET request to the courses the user is administrating
 router.get('/user_courses_admin', function(req, res){
-	User.getCoursesByUsername(req.body.userId, function(courses_administrating){
+	User.getAdminCoursesByUsername(req.body.userId, function(courses_administrating){
 		res.send(courses_administrating);
 	});
 });
