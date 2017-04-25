@@ -28,8 +28,12 @@ module.exports.createLecture = function(newLecture, callback){
 	newLecture.save(callback);
 }
 
-//Finds lecture by the self-generating lecture ID
-module.exports.getLectureById = function(lectureId, callback){
-	var query1 = {lectureId: lectureId};
-	Lecture.findOne(query1, callback);
+//Finds lecture by subject name and month
+module.exports.getLectureBySubjectAndMonth = function(subject, month, callback){
+	var query = {lectureId: lectureId,
+				month: date.getMonth()
+			};
+	Lecture.findOne(query, callback);
 }
+
+
