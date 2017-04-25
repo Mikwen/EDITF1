@@ -17,15 +17,11 @@ var UserSchema = mongoose.Schema({
 		type: String
 	},
 	courses_attending: {
-		type: String
+		type: [String]
 	},
 	courses_administrating: {
-		type: String
+		type: [String]
 	}
-	// ,
-	// userAdmin:{
-	// 	type: Boolean
-	// }
 });
 
 
@@ -65,6 +61,8 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
 	});
 }
 
+	
+
 //Function to add courses the user is attending in an array
 //TODO: Remove duplicates and null.
 module.exports.addCourseAttending = function(userId, courseId, callback){
@@ -75,34 +73,24 @@ module.exports.addCourseAttending = function(userId, courseId, callback){
 				found = true;
 			}
 		}
+		// if (user.courses_attending == undefined){
+		// 	user.courses_attending = []; 
+		// }
 		if (!found){
 			user.courses_attending.push(courseId);
 			user.save(callback);
 		}
 	});
 }
+
+//Search through the database for courses based on the username
 module.exports.getCoursesByUsername = function(userId, callback){
 	User.getUserByUsername(userId, function(err, user){
 		callback(user.courses_attending);
 	});
 }
 
-//Function to add courses this user is administrating in an array
-//TODO: remove dupicates and null.
-module.exports.addCourseAdministrating = function(userId, courseId, callback){
-	User.getUserByUsername(userId, function(err, user){
-		var found = false;
-		for (var course in user.courses_administrating) {
-			if (course == courseId) {
-				found = true;
-			}
-		}
-		if (!found){
-			user.courses_administrating.push(courseId);
-			user.save(callback);
-		}
-	});
-}
+//Find courses where you are admin.
 module.exports.getCoursesByUsername = function(userId, callback){
 	User.getUserByUsername(userId, function(err, user){
 		callback(user.courses_administrating);
