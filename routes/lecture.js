@@ -43,3 +43,11 @@ router.post('/lecture', function(req, res){
 		res.redirect('/');
 	}
 });
+
+router.get('/lecture', function(req, res){
+	lecture.getLectureBySubjectAndMonth(req.body.subject, req.body.month, function(lectures){
+		//res.json = lectures;
+		res.send(lectures);
+	});
+		//res.redirect('/');
+});
