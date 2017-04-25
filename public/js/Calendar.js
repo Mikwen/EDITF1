@@ -91,12 +91,13 @@ function genarateCalendar(){
   
 }
 
-// Register a helper
-  Handlebars.registerHelper('generateNextMonth', function(){
-	document.getElementById("month_name").innerHTML = "hello";
-  });
-    // Grab the template script
-  var theTemplateScript = $("#index-template").html();
+//// Register a helper
+  //Handlebars.registerHelper('generateNextMonth', function(){
+	//document.getElementById("month_name").innerHTML = "hello";
+  //});
+    //// Grab the template script
+  //var theTemplateScript = $("#index-template").html();
 
-  // Compile the template
-  var theTemplate = Handlebars.compile(theTemplateScript);
+  //// Compile the template
+  //var theTemplate = Handlebars.compile(theTemplateScript);
+

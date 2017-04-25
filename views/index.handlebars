@@ -1,7 +1,5 @@
-<script src="js/Calendar.js"></script>
-<body onload="genarateCalendar()">
 <header class="w3-container w3-teal w3-padding-xlarge">
-  <h1>Username</h1>
+  <h1>Welcome, {{username}}.</h1>
 </header>
 
 
@@ -10,9 +8,7 @@
     <div class="w3-container w3-padding-48" >
       <h2>Courses</h2>
       <ul class="w3-ul">
-        <li class="w3-hover-teal"><a href="view3.html"><h3>TDT4140</h3></a></li>
-        <li class="w3-hover-teal"><h3>MA1101</h3></li>
-        <li class="w3-hover-teal"><h3>AS1337</h3></li>
+        {{courseButtons}}
       </ul>
     </div> 
     <div>
@@ -36,16 +32,12 @@
         <div class="w3-col w3-padding-12" style="width:14.28%"><p class= "w3-center">Sat</p></div>
         <div class="w3-col w3-padding-12" style="width:14.28%"><p class= "w3-center">Sun</p></div>
     </div>
-    <div id="daysInGrid" class="w3-row">
-       
-    </div>
-     
-    
-    
-  
+    <div id="daysInGrid" class="w3-row"></div>
   </div>
   </div>
-  
-  
 </div>
-</body>
+
+<script src="js/Calendar.js"></script>
+<script>
+    document.onload=genarateCalendar()
+</script>
