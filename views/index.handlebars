@@ -19,9 +19,9 @@
   <div class="w3-container w3-threequarter w3-padding-64">
     <div class="w3-row"> 
         <div class = "w3-center w3-bar w3-display-container">
-			<button class="w3-button w3-teal w3-display-left"> &lt Previous</button>
+			<button onclick="cal.renderPrevMonth()" class="w3-button w3-teal w3-display-left"> &lt Previous</button>
 			<h2 id="month_name" > Month-name </h2> 
-			<button onclick="nextButton()" class="w3-button w3-teal w3-display-right">Next &gt</button>
+			<button onclick="cal.renderNextMonth()" class="w3-button w3-teal w3-display-right">Next &gt</button>
 		</div>
     <div class="w3-row w3-bottombar w3-border-teal">
         <div class="w3-col w3-padding-12" style="width:14.28%"><p class= "w3-center">Mon</p></div>
@@ -39,5 +39,7 @@
 
 <script src="js/Calendar.js"></script>
 <script>
-    document.onload=genarateCalendar()
+	document.addEventListener('DOMContentLoaded', function() {	
+		cal.render();
+	});
 </script>
