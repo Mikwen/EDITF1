@@ -1,6 +1,6 @@
 # EDITF1
 
-This application is a school project where one can add users, courses and lecture with differing information.
+This application is a school project where one can add users, courses and lecture with differing information on a web site and then get summaries from these as the lecturer(admin) adds them.
 The backend consists of 2 collections (a user collection and a lecture collection). The user collection is also linked to the courses.
 
 The routes go via their own respective models with custom schemas and the route links are directly implemented into the function so one can easily update the handlebars. 
