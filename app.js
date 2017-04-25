@@ -17,6 +17,7 @@ var db = mongoose.connection;
 
 var routes  = require ('./routes/index');
 var users = require ('./routes/users');
+var lecture = require('./routes/lecture')
 
 //init app
 var app = express();
@@ -46,6 +47,11 @@ resave: true
 //passport init
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(function(req,res,next){
+    res.locals.user = req.user;
+
+    next();
+});
 
 //Express validator (middleware)
 app.use(expressValidator({
@@ -85,5 +91,5 @@ app.use('/users', users);
 app.set('port', (process.env.PORT || 3000));
 //listen to port and tell user that connection has been established
 app.listen(app.get('port'), function(){
-    console.log('Server started on port' +app.get('port'));
+    console.log('Server started on port ' +app.get('port'));
 });
