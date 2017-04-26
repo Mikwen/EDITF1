@@ -44,17 +44,26 @@ function Calendar(month, year) {
 		  
 	  var dayGrid='';
 	  for (i=0; i< daysFromlastMonth; i++){
-		 dayGrid += '<div class="w3-light-gray w3-opacity  w3-center w3-col w3-padding-12 w3-border w3-border-teal" style="width:14.28%"><p id="lastMonth'+dayOne+'">'+ dayOne + '</p></div>';
-		 dayOne++;
+		if( i==4 || i==1 || i==0){
+			dayGrid += '<div class=" w3-light-gray w3-opacity  w3-center w3-col w3-padding-12 w3-border w3-border-teal" style="width:14.28%"><p id="thisMonth'+dayOne+'">'+ dayOne + '</p><p class="w3-teal"id="lecture'+dayOne+'"> TDT4140</p></div>';
+		}else{
+			dayGrid += '<div class="w3-light-gray w3-opacity  w3-center w3-col w3-padding-12 w3-border w3-border-teal" style="width:14.28%"><p id="lastMonth'+dayOne+'">'+ dayOne + '</p><p class="w3-text-light-gray"id="lecture'+dayOne+'"> noe</p></div>';
+		} dayOne++;
 	  } 
 	  
 	  dayOne = 1; //setting first day of the month to 1
 	  
 	  for (i=monthLength; i>0; i--){
-		 dayGrid += '<div class="  w3-center w3-col w3-padding-12 w3-border w3-border-teal" style="width:14.28%"><p id="thisMonth'+dayOne+'">'+ dayOne + '</p></div>';
+		if( i%7==3 || i%7==0 || i%7==6){
+		dayGrid += '<div class="  w3-center w3-col w3-padding-12 w3-border w3-border-teal" style="width:14.28%"><p id="thisMonth'+dayOne+'">'+ dayOne + '</p><p class="w3-teal"id="lecture'+dayOne+'"> TDT4140</p></div>';
+		}else{
+		dayGrid += '<div class="  w3-center w3-col w3-padding-12 w3-border w3-border-teal" style="width:14.28%"><p id="thisMonth'+dayOne+'">'+ dayOne + '</p><p class="w3-text-white"id="lecture'+dayOne+'"> noe</p></div>';
+		}
+			
 		 dayOne++;
 	  }
-	document.getElementById("daysInGrid").innerHTML = dayGrid; 
+	document.getElementById("daysInGrid").innerHTML = dayGrid;
+	this.populate();
   }
   
   this.renderNextMonth = function() {
@@ -73,6 +82,22 @@ function Calendar(month, year) {
 		this.year--;
 	}
 	this.render();
+  }
+  
+  this.populate = function() {
+	$.ajax({
+		//url: '192.168.1.247:3330/lecture/lecture',
+		url: 'http://192.168.1.247:3330/lecture/lecture?course=TDT4100&month='+(this.month+1)+'&year='+this.year,
+		type: 'GET',
+		/*data: { 
+			course: 'TDT4100', 
+			month: '04', 
+			year: '2017'
+		},*/
+		success: function(response) {
+			console.log(response[0].course);
+		}
+	});
   }
 }
 
