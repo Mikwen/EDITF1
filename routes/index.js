@@ -7,7 +7,7 @@ var http = require('http');
 router.get('/', ensureAuthenticated, function(req, res){
 	var options = {
 		host: 'localhost',
-		port: '3330',
+		port: '3000',
 		path: '/users/user_courses?userId='+req.user.username
 	}
 	http.request(options, function(response) {

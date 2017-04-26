@@ -48,7 +48,7 @@
 	var courseName = $('#newCourseName').val();
 	console.log(courseName);
 		$.ajax({
-			url: 'http://192.168.1.247:3330/users/user_courses',
+			url: 'http://192.168.1.247:3000/users/user_courses',
 			type: 'PUT',
 			data: {userId: '{{user.username}}',
 			       courseId: courseName
