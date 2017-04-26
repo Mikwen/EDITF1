@@ -85,7 +85,7 @@ function Calendar(month, year) {
   }
   
   this.populate = function() {
-	$.ajax({
+/*	$.ajax({
 		//url: '192.168.1.247:3330/lecture/lecture',
 		url: 'http://192.168.1.247:3330/lecture/lecture?course=TDT4100&month='+(this.month+1)+'&year='+this.year,
 		type: 'GET',
@@ -98,7 +98,7 @@ function Calendar(month, year) {
 			console.log(response[0].course);
 		}
 	});
-  }
+  }*/
 }
 
 //populate funksjon
