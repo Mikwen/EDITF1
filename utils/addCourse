@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mongo --eval "var courseCode='$1', courseName='$2'" addCourse.js
+mkdir -p ../public/files/$1
