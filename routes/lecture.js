@@ -44,18 +44,19 @@ router.post('/lectures', function(req, res){
 		finalDate.setMinutes(endTime.split(':')[1]);
 		var lectureObjects = [];
 		while (lectureTime <= finalDate) {
+			var lectureStartTime = new Date(lectureTime);
 			var lectureEndTime = new Date(lectureTime);
 			lectureEndTime.setHours(endTime.split(':')[0]);
 			lectureEndTime.setMinutes(endTime.split(':')[1]);
 			console.log(course);
 			console.log(roomNr);
-			console.log(lectureTime);
+			console.log(lectureStartTime);
 			console.log(lectureEndTime);
 			try{
 			var newLecture = new Lecture({
 				course: course,
 				roomNr: roomNr,
-				startTime: lectureTime,
+				startTime: lectureStartTime,
 				endTime: lectureEndTime
 			});
 			} catch(error) {
@@ -90,8 +91,9 @@ router.post('/lectures', function(req, res){
 });
 
 router.get('/lecture', function(req, res){
-	lecture.getLectureBySubjectAndMonth(req.query.subject, req.query.month, function(lectures){
+	Lecture.getLectureByCourseAndMonth(req.query.course, req.query.month, req.query.year, function(lectures){
 		//res.json = lectures;
+		console.log(lectures);
 		res.send(lectures);
 	});
 		//res.redirect('/');
