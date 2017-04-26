@@ -12,7 +12,8 @@
       </ul>
     </div> 
     <div>
-        <input type="button" class="w3-button-floating w3-right w3-border w3-border-teal" value="+">
+		<input type="text" id="newCourseName" />
+        <input type="button" onclick="addCourse()" id="addCourseButton" class="w3-button-floating w3-right w3-border w3-border-teal" value="+">
     </div>    
 	
   </div>
@@ -38,8 +39,21 @@
 </div>
 
 <script src="js/Calendar.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', function() {	
 		cal.render();
 	});
+	function addCourse() {
+	var courseName = $('#newCourseName').val();
+	console.log(courseName);
+		$.ajax({
+			url: 'http://192.168.1.247:3330/users/user_courses',
+			type: 'PUT',
+			data: {userId: '{{user.username}}',
+			       courseId: courseName
+				   }, 
+			success: function() { window.location.reload(false);}
+		});
+	}
 </script>
