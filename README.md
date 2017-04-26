@@ -5,18 +5,55 @@ The backend consists of 2 collections (a user collection and a lecture collectio
 
 The routes go via their own respective models with custom schemas and the route links are directly implemented into the function so one can easily update the handlebars. 
 
-In the current version (Beta: 1.1.2) the models used in the views is made with help of bootstrap models, but this was mainly to test the backend function.
 
 Technologies used:
-MongoDB
-Node js (express, handlebars, npm, json)
-HTML
-CSS
-GitBash (mainly for testing puproses)
+- MongoDB
+- Node js (express, handlebars, npm, json)
+- HTML
+- CSS
+- GitBash (mainly for testing puproses)
 
 
-TODOS as of 12.04.2017 16:07
 
-High priority:
-**GET file.
 
+## Install web service:
+### Requirements:
+- node.js
+- mongodb
+```
+git clone https://github.com/Mikwen/EDITF1.git
+cd EDITF1
+npm install
+utils/createCourse TDT4140 Programvareutvikling
+```
+Change ip address in routes/index.js to your servers ip.
+
+## Install summary bot:
+Uses python3.
+### Required libraries
+- networkx
+- nltk
+- io
+- itertools
+- pdfminer.six
+- reportlab
+```
+git clone https://github.com/Mikwen/summary-service.git
+sudo pip3 install <each required library>
+```
+Open a python shell and run 
+```
+import nltk
+nltk.download('punkt')
+```
+## To run full application
+Terminal 1:
+```
+cd EDITF1
+node app
+```
+Terminal 2:
+```
+python3 summary-service/summary-service.py EDITF1/public/files
+```
+In a browser open http://\<server-ip\>:3000
