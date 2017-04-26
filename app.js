@@ -18,7 +18,7 @@ var db = mongoose.connection;
 
 var routes  = require ('./routes/index');
 var users = require ('./routes/users');
-var lecture = require('./routes/lecture')
+var lecture = require('./routes/lecture');
 var files = require ('./routes/files');
 var course = require ('./routes/course');
 
@@ -94,6 +94,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/files', files);
 app.use('/course', course);
+app.use('/lecture', lecture);
 
 //set port
 app.set('port', (process.env.PORT || 3000));

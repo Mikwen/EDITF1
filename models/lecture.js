@@ -2,22 +2,22 @@ var mongoose = require('mongoose');
 
 //Lecture schema
 var LectureSchema = mongoose.Schema({
-	lectureId: {
+/*	lectureId: {
 		type: String,
 		index:true
-	},
-	subject: {
+	},*/
+	course: {
 		type: String
 	},
     roomNr: {
-		type: Number
+		type: String
 	},
-    date: {
+    startTime: {
         type: Date
     },
-    time: {
-        type: Date
-    }
+	endTime: {
+		type: Date
+	}
 });
 
 //Variable that is accessable outside this file (mongoose)

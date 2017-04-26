@@ -32,7 +32,25 @@
     <input type="file" name="sampleFile" />
     <input type="hidden" name="course" value={{course}} />
     <input type='submit' value='Upload!' />
-</form> 
+</form>
+
+<h2>Create weekly lectures</h2> 
+<form ref='courseForm' 
+  id='courseForm' 
+  action='/lecture/lectures' 
+  method='post' 
+  encType="multipart/form-data">
+    <input type="hidden" name="course" value={{course}} />
+	Room number: <input type="text" name="roomNr" /> <br>
+	Year: <input type="text" name="year" value="2017"/> <br>
+	Start day: <input type="text" name="startDay" /> <br>
+	Start month: <input type="text" name="startMonth" /> <br>
+	End day: <input type="text" name="endDay" /> <br>
+	End month: <input type="text" name="endMonth" /> <br>
+	Start time (hh:mm): <input type="text" name="startTime" /><br>
+	End time (hh:mm): <input type="text" name="endTime" /><br>
+    <input type='submit' value='Create' />
+</form>
 {{/if}}
   
 <script charset="utf-8">

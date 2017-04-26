@@ -1,21 +1,31 @@
 var express = require('express');
 var router  = express.Router();
 
-var lecture = require('../models/lecture')
+var Lecture = require('../models/lecture')
 
 // Register lecture
-router.post('/lecture', function(req, res){
-	var subject = req.body.subject;
+router.post('/lectures', function(req, res){
+	var course = req.body.course;
 	var roomNr = req.body.roomNr;
-	var date = req.body.date;
-	var time = req.body.time;
+	var startDay = req.body.startDay;
+	var startMonth = req.body.startMonth;
+	var endDay = req.body.endDay;
+	var endMonth = req.body.endMonth;
+	var year = req.body.year;
+	var startTime = req.body.startTime;
+	var endTime = req.body.endTime;
 
 	// Makes sure fields are not empty (Validation)
-	req.checkBody('subject', 'Subject is required').notEmpty();
+	req.checkBody('course', 'course is required').notEmpty();
 	req.checkBody('roomNr', 'Room number is required').notEmpty();
-	req.checkBody('date', 'Date is required').notEmpty();
-	req.checkBody('time', 'Time is required').notEmpty();
-
+	req.checkBody('startDay', 'Start day is required').notEmpty();
+	req.checkBody('startMonth', 'Start month is required').notEmpty();
+	req.checkBody('endDay', 'End day is required').notEmpty();
+	req.checkBody('endMonth', 'End month is required').notEmpty();
+	req.checkBody('year', 'Year is required').notEmpty;
+	req.checkBody('startTime', 'Start time is required').notEmpty();
+	req.checkBody('endTime', 'End time is required').notEmpty();
+	//TODO: Check input format
 	var errors = req.validationErrors();
 
 //If there is an error it displays error and then re-renders the page
@@ -24,30 +34,67 @@ router.post('/lecture', function(req, res){
 			errors:errors
 		});
 	} else {
-		var newLecture = new Lecture({
-			subject: subject,
-			roomNr:roomNr,
-			date: date,
-			time: time
-		});
+		var lectureTime = new Date();
+		lectureTime.setFullYear(year, startMonth, startDay);
+		lectureTime.setHours(startTime.split(':')[0]);
+		lectureTime.setMinutes(startTime.split(':')[1]);
+		var finalDate = new Date();
+		finalDate.setFullYear(year, endMonth, endDay);
+		finalDate.setHours(endTime.split(':')[0]);
+		finalDate.setMinutes(endTime.split(':')[1]);
+		var lectureObjects = [];
+		while (lectureTime <= finalDate) {
+			var lectureEndTime = new Date(lectureTime);
+			lectureEndTime.setHours(endTime.split(':')[0]);
+			lectureEndTime.setMinutes(endTime.split(':')[1]);
+			console.log(course);
+			console.log(roomNr);
+			console.log(lectureTime);
+			console.log(lectureEndTime);
+			try{
+			var newLecture = new Lecture({
+				course: course,
+				roomNr: roomNr,
+				startTime: lectureTime,
+				endTime: lectureEndTime
+			});
+			} catch(error) {
+			console.log(error);
+			}
 
-        //takes in new lecture and callback
-        //checks for an error
-		Lecture.createLecture(newLecture, function(err, lecture){
-			if(err) throw err;
-			console.log(lecture);
-		});
+			//takes in new lecture and callback
+			//checks for an error
+			Lecture.createLecture(newLecture, function(err, lecture){
+				if(err) {console.log(err); throw err;}
+				//console.log(lecture);
+			});
+
+			
+			//set next lecture time in one week
+			lectureTime.setDate(lectureTime.getDate() + 7);
+		}
+		
+		/*for (var newLecture in lectureObjects) {
+			//takes in new lecture and callback
+			//checks for an error
+			Lecture.createLecture(newLecture, function(err, lecture){
+				if(err) {console.log(err); throw err;}
+				//console.log(lecture);
+			});
+		}*/
 
         //Gives success msg and redirects to dashboard
-		req.flash('success_msg', 'You have successfully added a lecture!');
+		req.flash('success_msg', 'You have successfully added the lectures!');
 		res.redirect('/');
 	}
 });
 
 router.get('/lecture', function(req, res){
-	lecture.getLectureBySubjectAndMonth(req.body.subject, req.body.month, function(lectures){
+	lecture.getLectureBySubjectAndMonth(req.query.subject, req.query.month, function(lectures){
 		//res.json = lectures;
 		res.send(lectures);
 	});
 		//res.redirect('/');
 });
+
+module.exports = router;
