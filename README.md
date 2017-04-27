@@ -56,4 +56,14 @@ Terminal 2:
 ```
 python3 summary-service/summary-service.py EDITF1/public/files
 ```
-In a browser open http://\<server-ip\>:3000
+In a browser:
+1. Open http://\<server-ip\>:3000.
+2. Click "Register" and make a user.
+3. Log in.
+4. Enter "TDT4140" in the text field on the left and click the '+', button.
+5. Refresh the page.
+6. Click the "TDT4140" button on the left.
+7. Scroll down and upload a pdf file using the form.
+9. The bot will start generating the summary.
+10. Wait a minute and refresh the page.
+11. Both the original file and the summary is available and can be read by clicking them.
